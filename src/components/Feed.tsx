@@ -6,9 +6,9 @@ const mockPosts = [
     {
         id: '1',
         author: {
-            name: 'React Core Team',
-            handle: '@reactjs',
-            avatar: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
         content: "El nuevo compilador de React ya está disponible en beta abierta ⚛️\n\nA partir de hoy, puedes probar el React Compiler en tus proyectos. Este compilador memoiza automáticamente tus componentes, eliminando la necesidad de usar useMemo y useCallback de forma manual.\n\nInstala las dependencias y pruébalo con: \nnpm install babel-plugin-react-compiler",
         image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
@@ -20,8 +20,8 @@ const mockPosts = [
     {
         id: '2',
         author: {
-            name: 'Alex Rivera (Tú)',
-            handle: '@alexrivera_dev',
+            name: 'BYCHOKE',
+            handle: '@bychoke',
             avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
         content: "Migrando de Tailwind v3 a v4: Mi experiencia 💻\n\nAcabo de migrar la base de este blog a la nueva versión de Tailwind CSS. La directiva @theme y la compilación basada en JS eliminan muchísima configuración innecesaria de postcss.\n\n¿Alguien más ya ha hecho el cambio en producción?",
@@ -33,9 +33,9 @@ const mockPosts = [
     {
         id: '3',
         author: {
-            name: 'Frontend Digest',
-            handle: '@fedigest',
-            avatar: 'https://images.unsplash.com/photo-1627843563095-f6e94676ec83?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
         content: "Patrón de Arquitectura: Inversión de Dependencias en TypeScript 💡\n\nNo acoples tus servicios directamente en tus componentes de React. Pasa tus dependencias como props o mediante Contexto. Esto facilita enormemente el testing unitario y la refactorización.\n\n```typescript\ninterface Props {\n  userService: IUserService;\n}\n```",
         timestamp: '8h',
@@ -46,9 +46,9 @@ const mockPosts = [
     {
         id: '4',
         author: {
-            name: 'OpenAI API',
-            handle: '@openai_api',
-            avatar: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
         content: "Nuevos modelos de razonamiento (o1) ahora disponibles en la API 🧠\n\nHemos lanzado la nueva familia de modelos o1 diseñados para pensar antes de responder. Son ideales para tareas complejas de código, matemáticas y ciencia.\n\nYa puedes integrarlos usando el SDK de Node.js actualizando a la versión v4.60.0.",
         timestamp: '12h',

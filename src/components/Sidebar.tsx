@@ -15,9 +15,9 @@ const Sidebar = () => {
         <div className="hidden md:flex flex-col w-64 h-screen sticky top-0 border-r border-slate-200 dark:border-slate-800 p-4">
             <div className="flex items-center gap-3 px-4 py-3 mb-6">
                 <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">S</span>
+                    <span className="text-white font-bold text-lg">B</span>
                 </div>
-                <h1 className="text-xl font-bold tracking-tight">TechSphere</h1>
+                <h1 className="text-xl font-bold tracking-tight">Blog BYCHOKE</h1>
             </div>
 
             <nav className="flex-1 space-y-2">
@@ -52,8 +52,8 @@ const Sidebar = () => {
                     className="w-10 h-10 rounded-full object-cover border-2 border-slate-100 dark:border-slate-800"
                 />
                 <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm truncate">Alex Rivera</p>
-                    <p className="text-xs text-slate-500 truncate">@alexrivera</p>
+                    <p className="font-semibold text-sm truncate">BYCHOKE</p>
+                    <p className="text-xs text-slate-500 truncate">@bychoke</p>
                 </div>
             </div>
         </div>

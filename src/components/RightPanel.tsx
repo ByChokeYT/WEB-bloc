@@ -24,7 +24,7 @@ const RightPanel = () => {
                 <input
                     type="text"
                     className="block w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800/50 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/40 text-sm transition-all outline-none placeholder:text-slate-500"
-                    placeholder="Buscar en TechSphere"
+                    placeholder="Buscar artículos..."
                 />
             </div>
 
@@ -75,7 +75,7 @@ const RightPanel = () => {
                     <a href="#" className="hover:underline">Privacidad</a>
                     <a href="#" className="hover:underline">Cookies</a>
                     <a href="#" className="hover:underline">Anuncios</a>
-                    <span>© 2026 TechSphere</span>
+                    <span>© 2026 Blog BYCHOKE</span>
                 </div>
             </div>
         </div>
