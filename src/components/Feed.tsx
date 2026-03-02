@@ -42,6 +42,19 @@ const mockPosts = [
         likes: 3054,
         comments: 290,
         shares: 720,
+    },
+    {
+        id: '4',
+        author: {
+            name: 'OpenAI API',
+            handle: '@openai_api',
+            avatar: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+        },
+        content: "Nuevos modelos de razonamiento (o1) ahora disponibles en la API 🧠\n\nHemos lanzado la nueva familia de modelos o1 diseñados para pensar antes de responder. Son ideales para tareas complejas de código, matemáticas y ciencia.\n\nYa puedes integrarlos usando el SDK de Node.js actualizando a la versión v4.60.0.",
+        timestamp: '12h',
+        likes: 15420,
+        comments: 1205,
+        shares: 5430,
     }
 ];
 
