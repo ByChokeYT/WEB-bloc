@@ -70,8 +70,8 @@ const Feed = () => {
             <CreatePost />
 
             <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {mockPosts.map((post) => (
-                    <PostCard key={post.id} post={post} />
+                {mockPosts.map((post, index) => (
+                    <PostCard key={post.id} post={post} index={index} />
                 ))}
             </div>
         </div>

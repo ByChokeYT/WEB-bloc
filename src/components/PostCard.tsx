@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, MessageSquare, Share2, MoreHorizontal, Bookmark } from 'lucide-react';
+import { Heart, MessageSquare, Share2, MoreHorizontal, Bookmark, BadgeCheck } from 'lucide-react';
 
 interface PostProps {
     post: {
@@ -15,10 +15,11 @@ interface PostProps {
         likes: number;
         comments: number;
         shares: number;
-    }
+    };
+    index?: number;
 }
 
-const PostCard = ({ post }: PostProps) => {
+const PostCard = ({ post, index = 0 }: PostProps) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(post.likes);
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -32,8 +33,43 @@ const PostCard = ({ post }: PostProps) => {
         setIsBookmarked(!isBookmarked);
     };
 
+    const renderContent = (text: string) => {
+        if (!text.includes('```')) return text;
+        const parts = text.split(/```(\w+)?\n([\s\S]*?)```/);
+
+        const elements = [];
+        for (let i = 0; i < parts.length; i++) {
+            if (i % 3 === 0) {
+                if (parts[i]) elements.push(<span key={i}>{parts[i]}</span>);
+            } else if (i % 3 === 1) {
+                // This is the language tag (e.g., 'typescript')
+            } else {
+                // This is the code content
+                elements.push(
+                    <div key={i} className="my-3 rounded-xl bg-[#0d1117] dark:bg-black/80 overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div className="bg-slate-100 dark:bg-slate-900/80 px-4 py-2 text-xs text-slate-500 font-mono flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+                            <div className="flex gap-1.5">
+                                <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <span className="uppercase opacity-70 tracking-wider text-[10px]">{parts[i - 1] || 'code'}</span>
+                        </div>
+                        <pre className="p-4 text-[0.9rem] text-blue-400 dark:text-blue-300 font-mono overflow-x-auto leading-relaxed">
+                            <code>{parts[i]}</code>
+                        </pre>
+                    </div>
+                );
+            }
+        }
+        return elements;
+    };
+
     return (
-        <article className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 md:p-6 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/10">
+        <article
+            className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 md:p-6 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/10 animate-fade-in-up"
+            style={{ animationDelay: `${index * 0.15}s`, opacity: 0 }}
+        >
             <div className="flex gap-3 md:gap-4">
                 {/* Avatar */}
                 <img
@@ -47,9 +83,14 @@ const PostCard = ({ post }: PostProps) => {
                     {/* Header */}
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                            <span className="font-bold text-slate-900 dark:text-slate-100 hover:underline cursor-pointer truncate">
-                                {post.author.name}
-                            </span>
+                            <div className="flex items-center gap-1">
+                                <span className="font-bold text-slate-900 dark:text-slate-100 hover:underline cursor-pointer truncate">
+                                    {post.author.name}
+                                </span>
+                                {post.author.handle === '@bychoke' && (
+                                    <BadgeCheck className="w-4 h-4 text-blue-500 fill-blue-50" />
+                                )}
+                            </div>
                             <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
                                 <span className="truncate">{post.author.handle}</span>
                                 <span className="hidden sm:inline w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
@@ -63,9 +104,9 @@ const PostCard = ({ post }: PostProps) => {
                     </div>
 
                     {/* Post Text */}
-                    <p className="text-slate-800 dark:text-slate-200 text-base md:text-[1.05rem] leading-relaxed mb-4 whitespace-pre-wrap word-break">
-                        {post.content}
-                    </p>
+                    <div className="text-slate-800 dark:text-slate-200 text-base md:text-[1.05rem] leading-relaxed mb-4 whitespace-pre-wrap word-break">
+                        {renderContent(post.content)}
+                    </div>
 
                     {/* Attached Image */}
                     {post.image && (
