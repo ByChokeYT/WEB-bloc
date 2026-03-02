@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import { Image, Code, FileText, Link, Send } from 'lucide-react';
 
-const CreatePost = () => {
+interface CreatePostProps {
+    onPostSubmit?: (content: string) => void;
+}
+
+const CreatePost = ({ onPostSubmit }: CreatePostProps) => {
     const [content, setContent] = useState('');
+
+    const handlePublish = () => {
+        if (!content.trim()) return;
+        if (onPostSubmit) {
+            onPostSubmit(content);
+        }
+        setContent('');
+    };
 
     return (
         <div className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 pt-6 px-4 md:px-6">
@@ -38,6 +50,7 @@ const CreatePost = () => {
                         </div>
 
                         <button
+                            onClick={handlePublish}
                             className={`flex items-center gap-2 px-5 py-2 rounded-full font-bold transition-all ${content.trim()
                                 ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
                                 : 'bg-blue-100 text-blue-400 dark:bg-blue-900/30 dark:text-blue-800 cursor-not-allowed'
