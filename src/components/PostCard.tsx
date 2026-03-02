@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import { Heart, MessageSquare, Share2, MoreHorizontal, Bookmark } from 'lucide-react';
 
 interface PostProps {
@@ -19,6 +19,19 @@ interface PostProps {
 }
 
 const PostCard = ({ post }: PostProps) => {
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(post.likes);
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    const handleLike = () => {
+        setIsLiked(!isLiked);
+        setLikeCount(prev => isLiked ? prev - 1 : prev + 1);
+    };
+
+    const handleBookmark = () => {
+        setIsBookmarked(!isBookmarked);
+    };
+
     return (
         <article className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 md:p-6 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/10">
             <div className="flex gap-3 md:gap-4">
@@ -63,30 +76,36 @@ const PostCard = ({ post }: PostProps) => {
 
                     {/* Action Buttons */}
                     <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 max-w-md w-full">
-                        <button className="flex items-center gap-2 group transition-colors hover:text-blue-500">
-                            <div className="p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors">
+                        <button className="flex items-center gap-2 group transition-colors hover:text-blue-500 text-slate-500 dark:text-slate-400">
+                            <div className="p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors active:scale-75">
                                 <MessageSquare className="w-4 h-4 md:w-5 md:h-5" />
                             </div>
                             <span className="text-xs md:text-sm">{post.comments > 0 ? post.comments : ''}</span>
                         </button>
 
-                        <button className="flex items-center gap-2 group transition-colors hover:text-pink-500">
-                            <div className="p-2 rounded-full group-hover:bg-pink-50 dark:group-hover:bg-pink-900/20 transition-colors">
-                                <Heart className="w-4 h-4 md:w-5 md:h-5" />
+                        <button
+                            onClick={handleLike}
+                            className={`flex items-center gap-2 group transition-all duration-300 ${isLiked ? 'text-pink-500' : 'hover:text-pink-500 text-slate-500 dark:text-slate-400'}`}
+                        >
+                            <div className={`p-2 rounded-full transition-all duration-300 ${isLiked ? 'bg-pink-100 dark:bg-pink-900/30' : 'group-hover:bg-pink-50 dark:group-hover:bg-pink-900/20'} active:scale-75`}>
+                                <Heart className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${isLiked ? 'fill-pink-500 scale-110' : 'scale-100'}`} />
                             </div>
-                            <span className="text-xs md:text-sm">{post.likes > 0 ? post.likes : ''}</span>
+                            <span className="text-xs md:text-sm tabular-nums">{likeCount > 0 ? likeCount : ''}</span>
                         </button>
 
-                        <button className="flex items-center gap-2 group transition-colors hover:text-green-500">
-                            <div className="p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-green-900/20 transition-colors">
+                        <button className="flex items-center gap-2 group transition-colors hover:text-green-500 text-slate-500 dark:text-slate-400">
+                            <div className="p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-green-900/20 transition-colors active:scale-75">
                                 <Share2 className="w-4 h-4 md:w-5 md:h-5" />
                             </div>
                             <span className="text-xs md:text-sm">{post.shares > 0 ? post.shares : ''}</span>
                         </button>
 
-                        <button className="flex items-center gap-2 group transition-colors hover:text-blue-500">
-                            <div className="p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors">
-                                <Bookmark className="w-4 h-4 md:w-5 md:h-5" />
+                        <button
+                            onClick={handleBookmark}
+                            className={`flex items-center gap-2 group transition-all duration-300 ${isBookmarked ? 'text-blue-500' : 'hover:text-blue-500 text-slate-500 dark:text-slate-400'}`}
+                        >
+                            <div className={`p-2 rounded-full transition-all duration-300 ${isBookmarked ? 'bg-blue-100 dark:bg-blue-900/30' : 'group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20'} active:scale-75`}>
+                                <Bookmark className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${isBookmarked ? 'fill-blue-500 scale-110' : 'scale-100'}`} />
                             </div>
                         </button>
                     </div>
