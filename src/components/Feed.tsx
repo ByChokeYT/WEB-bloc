@@ -86,7 +86,7 @@ const Feed = () => {
         return `Hoy a las ${hours}:${minutes}`;
     };
 
-    const handleNewPost = (content: string) => {
+    const handleNewPost = (content: string, image?: string) => {
         const newPost = {
             id: Date.now().toString(),
             author: {
@@ -95,6 +95,7 @@ const Feed = () => {
                 avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
             },
             content,
+            image,
             timestamp: formatTimestamp(),
             likes: 0,
             comments: 0,
