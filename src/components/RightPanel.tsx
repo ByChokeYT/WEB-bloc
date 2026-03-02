@@ -1,7 +1,12 @@
 
 import { Search, TrendingUp, Users } from 'lucide-react';
 
-const RightPanel = () => {
+interface RightPanelProps {
+    searchQuery: string;
+    setSearchQuery: (query: string) => void;
+}
+
+const RightPanel = ({ searchQuery, setSearchQuery }: RightPanelProps) => {
     const trendingTopics = [
         { tag: '#React19', posts: '124K' },
         { tag: '#TypeScript', posts: '45.2K' },
@@ -23,6 +28,8 @@ const RightPanel = () => {
                 </div>
                 <input
                     type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="block w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800/50 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/40 text-sm transition-all outline-none placeholder:text-slate-500"
                     placeholder="Buscar artículos..."
                 />
@@ -36,9 +43,9 @@ const RightPanel = () => {
                 </div>
                 <div className="space-y-4">
                     {trendingTopics.map((topic, i) => (
-                        <div key={i} className="group cursor-pointer">
+                        <div key={i} className="group cursor-pointer" onClick={() => setSearchQuery(topic.tag)}>
                             <p className="text-slate-500 dark:text-slate-400 text-xs mb-0.5 group-hover:text-blue-500 transition-colors">Tema del Momento</p>
-                            <p className="font-semibold text-slate-900 dark:text-slate-100">{topic.tag}</p>
+                            <p className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{topic.tag}</p>
                             <p className="text-slate-500 dark:text-slate-500 text-xs mt-0.5">{topic.posts} Publicaciones</p>
                         </div>
                     ))}

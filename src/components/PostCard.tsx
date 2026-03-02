@@ -14,6 +14,7 @@ export interface Post {
     likes: number;
     comments: number;
     shares: number;
+    category?: string;
 }
 
 interface PostProps {

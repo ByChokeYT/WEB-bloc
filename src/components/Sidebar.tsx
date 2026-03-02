@@ -3,16 +3,18 @@ import { Terminal, BookOpen, Rocket, Users, Monitor, Settings, PenSquare } from 
 
 interface SidebarProps {
     isAdmin?: boolean;
+    activeCategory: string;
+    setActiveCategory: (category: string) => void;
 }
 
-const Sidebar = ({ isAdmin = true }: SidebarProps) => {
+const Sidebar = ({ isAdmin = true, activeCategory, setActiveCategory }: SidebarProps) => {
     const navItems = [
-        { icon: Terminal, label: 'Últimas Noticias', active: true },
-        { icon: BookOpen, label: 'Tutoriales', active: false },
-        { icon: Rocket, label: 'Lanzamientos', active: false },
-        { icon: Users, label: 'Comunidad', active: false },
-        { icon: Monitor, label: 'Mi Setup', active: false },
-        { icon: Settings, label: 'Configuración', active: false },
+        { icon: Terminal, label: 'Últimas Noticias' },
+        { icon: BookOpen, label: 'Tutoriales' },
+        { icon: Rocket, label: 'Lanzamientos' },
+        { icon: Users, label: 'Comunidad' },
+        { icon: Monitor, label: 'Mi Setup' },
+        { icon: Settings, label: 'Configuración' },
     ];
 
     return (
@@ -25,23 +27,27 @@ const Sidebar = ({ isAdmin = true }: SidebarProps) => {
             </div>
 
             <nav className="flex-1 space-y-2">
-                {navItems.map((item, index) => (
-                    <a
-                        key={index}
-                        href="#"
-                        className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 group ${item.active
-                            ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold'
-                            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
-                            }`}
-                    >
-                        <item.icon
-                            className={`w-6 h-6 transition-transform duration-200 group-hover:scale-110 ${item.active ? 'fill-blue-100 dark:fill-blue-900/40' : ''
+                {navItems.map((item, index) => {
+                    const isActive = activeCategory === item.label;
+                    return (
+                        <a
+                            key={index}
+                            href="#"
+                            onClick={(e) => { e.preventDefault(); setActiveCategory(item.label); }}
+                            className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 group ${isActive
+                                ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold'
+                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
                                 }`}
-                            strokeWidth={item.active ? 2.5 : 2}
-                        />
-                        <span className="text-[1.05rem]">{item.label}</span>
-                    </a>
-                ))}
+                        >
+                            <item.icon
+                                className={`w-6 h-6 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'fill-blue-100 dark:fill-blue-900/40' : ''
+                                    }`}
+                                strokeWidth={isActive ? 2.5 : 2}
+                            />
+                            <span className="text-[1.05rem]">{item.label}</span>
+                        </a>
+                    );
+                })}
             </nav>
 
             {isAdmin && (

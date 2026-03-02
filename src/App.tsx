@@ -7,17 +7,30 @@ import { useState } from 'react';
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('Últimas Noticias');
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex justify-center selection:bg-blue-500/30">
       <div className="w-full max-w-7xl flex flex-col md:flex-row relative">
-        <Sidebar isAdmin={isAdmin} />
+        <Sidebar
+          isAdmin={isAdmin}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
 
         <main className="flex-1 w-full flex justify-center lg:justify-start xl:justify-center">
-          <Feed isAdmin={isAdmin} />
+          <Feed
+            isAdmin={isAdmin}
+            searchQuery={searchQuery}
+            activeCategory={activeCategory}
+          />
         </main>
 
-        <RightPanel />
+        <RightPanel
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
 
         {/* Mobile Bottom Navigation */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 z-50 flex items-center justify-around py-3 px-4 safe-area-bottom">

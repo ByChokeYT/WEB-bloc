@@ -17,6 +17,7 @@ const initialPosts = [
         likes: 8431,
         comments: 624,
         shares: 1192,
+        category: 'Lanzamientos',
     },
     {
         id: '2',
@@ -30,6 +31,7 @@ const initialPosts = [
         likes: 856,
         comments: 42,
         shares: 115,
+        category: 'Tutoriales',
     },
     {
         id: '3',
@@ -43,6 +45,7 @@ const initialPosts = [
         likes: 3054,
         comments: 290,
         shares: 720,
+        category: 'Tutoriales',
     },
     {
         id: '4',
@@ -56,14 +59,17 @@ const initialPosts = [
         likes: 15420,
         comments: 1205,
         shares: 5430,
+        category: 'Últimas Noticias',
     }
 ];
 
 interface FeedProps {
     isAdmin?: boolean;
+    searchQuery: string;
+    activeCategory: string;
 }
 
-const Feed = ({ isAdmin = true }: FeedProps) => {
+const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
     // Inicializar desde localStorage si existe, usar mockPosts como fallback
     const [posts, setPosts] = useState(() => {
         const savedPosts = localStorage.getItem('techsphere-posts');
@@ -104,6 +110,7 @@ const Feed = ({ isAdmin = true }: FeedProps) => {
             likes: 0,
             comments: 0,
             shares: 0,
+            category: activeCategory,
         };
         setPosts([newPost, ...posts]);
     };
@@ -111,6 +118,17 @@ const Feed = ({ isAdmin = true }: FeedProps) => {
     const handleDelete = (id: string) => {
         setPosts(posts.filter((post: Post) => post.id !== id));
     };
+
+    const filteredPosts = posts.filter((post: Post) => {
+        // 1. Filtrar por búsqueda
+        const matchesSearch = post.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.author.name.toLowerCase().includes(searchQuery.toLowerCase());
+
+        // 2. Filtrar por categoría (Sidebar)
+        const matchesCategory = activeCategory === 'Últimas Noticias' ? true : post.category === activeCategory;
+
+        return matchesSearch && matchesCategory;
+    });
 
     return (
         <div className="flex-1 w-full max-w-2xl mx-auto min-h-screen border-r border-slate-200 dark:border-slate-800 pb-20 md:pb-0">
@@ -123,12 +141,14 @@ const Feed = ({ isAdmin = true }: FeedProps) => {
             {isAdmin && <CreatePost onPostSubmit={handleNewPost} />}
 
             <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {posts.length === 0 ? (
+                {filteredPosts.length === 0 ? (
                     <div className="p-8 text-center text-slate-500">
-                        No hay artículos aún. ¡Sé el primero en compartir!
+                        {searchQuery || activeCategory !== 'Últimas Noticias'
+                            ? "No se encontraron posts con esos filtros."
+                            : "No hay artículos aún. ¡Sé el primero en compartir!"}
                     </div>
                 ) : (
-                    posts.map((post: any, index: number) => (
+                    filteredPosts.map((post: any, index: number) => (
                         <PostCard
                             key={post.id}
                             post={post}
