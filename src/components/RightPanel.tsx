@@ -3,14 +3,14 @@ import { Search, TrendingUp, Users } from 'lucide-react';
 
 const RightPanel = () => {
     const trendingTopics = [
-        { tag: '#Technology', posts: '124K' },
-        { tag: '#ReactJS', posts: '45.2K' },
-        { tag: '#Design', posts: '89.1K' },
-        { tag: '#ArtificialIntelligence', posts: '210K' },
+        { tag: '#React19', posts: '124K' },
+        { tag: '#TypeScript', posts: '45.2K' },
+        { tag: '#AIAgents', posts: '89.1K' },
+        { tag: '#WebPerformance', posts: '210K' },
     ];
 
     const suggestedUsers = [
-        { name: 'Sarah Drasner', handle: '@sarah_edo', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80' },
+        { name: 'Guillermo Rauch', handle: '@rauchg', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80' },
         { name: 'Dan Abramov', handle: '@dan_abramov', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80' },
     ];
 
@@ -24,7 +24,7 @@ const RightPanel = () => {
                 <input
                     type="text"
                     className="block w-full pl-11 pr-4 py-3 bg-slate-100 dark:bg-slate-800/50 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/40 text-sm transition-all outline-none placeholder:text-slate-500"
-                    placeholder="Buscar en SocialSphere"
+                    placeholder="Buscar en TechSphere"
                 />
             </div>
 
@@ -75,7 +75,7 @@ const RightPanel = () => {
                     <a href="#" className="hover:underline">Privacidad</a>
                     <a href="#" className="hover:underline">Cookies</a>
                     <a href="#" className="hover:underline">Anuncios</a>
-                    <span>© 2026 SocialSphere</span>
+                    <span>© 2026 TechSphere</span>
                 </div>
             </div>
         </div>

@@ -6,25 +6,25 @@ const mockPosts = [
     {
         id: '1',
         author: {
-            name: 'Vercel',
-            handle: '@vercel',
-            avatar: 'https://images.unsplash.com/photo-1614680376593-902f74a9cb0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+            name: 'React Core Team',
+            handle: '@reactjs',
+            avatar: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
-        content: "¡Estamos emocionados de anunciar Next.js 15! 🚀\n\nCon pre-renderizado parcial avanzado, tiempos de compilación mejorados y un sistema de caché totalmente renovado. Revisa nuestro blog para todos los detalles.",
-        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
+        content: "El nuevo compilador de React ya está disponible en beta abierta ⚛️\n\nA partir de hoy, puedes probar el React Compiler en tus proyectos. Este compilador memoiza automáticamente tus componentes, eliminando la necesidad de usar useMemo y useCallback de forma manual.\n\nInstala las dependencias y pruébalo con: \nnpm install babel-plugin-react-compiler",
+        image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
         timestamp: '2h',
-        likes: 4231,
-        comments: 324,
-        shares: 892,
+        likes: 8431,
+        comments: 624,
+        shares: 1192,
     },
     {
         id: '2',
         author: {
-            name: 'Alex Rivera',
-            handle: '@alexrivera',
+            name: 'Alex Rivera (Tú)',
+            handle: '@alexrivera_dev',
             avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
-        content: "Acabo de terminar de rediseñar mi portafolio usando Tailwind CSS y Framer Motion. La nueva estética está fuertemente inspirada en productos SaaS minimalistas modernos. ¿Qué opinan?\n\n¡Estaré compartiendo las plantillas la próxima semana! 🔥",
+        content: "Migrando de Tailwind v3 a v4: Mi experiencia 💻\n\nAcabo de migrar la base de este blog a la nueva versión de Tailwind CSS. La directiva @theme y la compilación basada en JS eliminan muchísima configuración innecesaria de postcss.\n\n¿Alguien más ya ha hecho el cambio en producción?",
         timestamp: '5h',
         likes: 856,
         comments: 42,
@@ -33,15 +33,15 @@ const mockPosts = [
     {
         id: '3',
         author: {
-            name: 'Design Digest',
-            handle: '@designdigest',
+            name: 'Frontend Digest',
+            handle: '@fedigest',
             avatar: 'https://images.unsplash.com/photo-1627843563095-f6e94676ec83?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
         },
-        content: "Consejo de Tipografía💡: Deja de usar negro puro (#000000) para tu texto. Causa fatiga visual contra fondos blancos. \n\nIntenta usar un color pizarra oscuro (#0f172a) o carbón oscuro (#1c1c1c) para un aspecto más suave y premium.",
+        content: "Patrón de Arquitectura: Inversión de Dependencias en TypeScript 💡\n\nNo acoples tus servicios directamente en tus componentes de React. Pasa tus dependencias como props o mediante Contexto. Esto facilita enormemente el testing unitario y la refactorización.\n\n```typescript\ninterface Props {\n  userService: IUserService;\n}\n```",
         timestamp: '8h',
-        likes: 12054,
-        comments: 890,
-        shares: 4320,
+        likes: 3054,
+        comments: 290,
+        shares: 720,
     }
 ];
 
@@ -50,7 +50,7 @@ const Feed = () => {
         <div className="flex-1 w-full max-w-2xl mx-auto min-h-screen border-r border-slate-200 dark:border-slate-800 pb-20 md:pb-0">
             <header className="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 md:px-6 md:py-4">
                 <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
-                    Inicio
+                    Últimas Noticias
                 </h2>
             </header>
 

@@ -1,13 +1,13 @@
 
-import { Home, Compass, Bell, Mail, User, Settings, PenSquare } from 'lucide-react';
+import { Terminal, BookOpen, Rocket, Users, Monitor, Settings, PenSquare } from 'lucide-react';
 
 const Sidebar = () => {
     const navItems = [
-        { icon: Home, label: 'Inicio', active: true },
-        { icon: Compass, label: 'Explorar', active: false },
-        { icon: Bell, label: 'Notificaciones', active: false },
-        { icon: Mail, label: 'Mensajes', active: false },
-        { icon: User, label: 'Perfil', active: false },
+        { icon: Terminal, label: 'Últimas Noticias', active: true },
+        { icon: BookOpen, label: 'Tutoriales', active: false },
+        { icon: Rocket, label: 'Lanzamientos', active: false },
+        { icon: Users, label: 'Comunidad', active: false },
+        { icon: Monitor, label: 'Mi Setup', active: false },
         { icon: Settings, label: 'Configuración', active: false },
     ];
 
@@ -17,7 +17,7 @@ const Sidebar = () => {
                 <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
                     <span className="text-white font-bold text-lg">S</span>
                 </div>
-                <h1 className="text-xl font-bold tracking-tight">SocialSphere</h1>
+                <h1 className="text-xl font-bold tracking-tight">TechSphere</h1>
             </div>
 
             <nav className="flex-1 space-y-2">
@@ -42,7 +42,7 @@ const Sidebar = () => {
 
             <button className="mt-auto flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-2xl font-semibold shadow-[0_8px_16px_rgba(37,99,235,0.2)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 transition-all duration-200 active:translate-y-0">
                 <PenSquare className="w-5 h-5" />
-                <span>Crear Publicación</span>
+                <span>Escribir Artículo</span>
             </button>
 
             <div className="mt-6 flex items-center gap-3 px-3 py-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors">

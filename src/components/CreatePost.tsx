@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Video, Smile, MapPin, Send } from 'lucide-react';
+import { Image, Code, FileText, Link, Send } from 'lucide-react';
 
 const CreatePost = () => {
     const [content, setContent] = useState('');
@@ -16,24 +16,24 @@ const CreatePost = () => {
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        placeholder="¿Qué está pasando?"
+                        placeholder="¿Sobre qué tecnología escribirás hoy?"
                         className="w-full bg-transparent text-lg md:text-xl placeholder:text-slate-500 dark:placeholder:text-slate-400 resize-none outline-none min-h-[60px] max-h-[400px]"
                         rows={content ? 3 : 1}
                     />
 
                     <div className="flex items-center justify-between mt-4 pb-2 border-t border-slate-100 dark:border-slate-800/60 pt-3">
                         <div className="flex items-center gap-1 md:gap-2">
-                            <button title="Añadir multimedia" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors">
+                            <button title="Añadir imagen" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors">
                                 <Image className="w-5 h-5" />
                             </button>
-                            <button title="Añadir video" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
-                                <Video className="w-5 h-5" />
+                            <button title="Añadir bloque de código" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
+                                <Code className="w-5 h-5" />
                             </button>
-                            <button title="Añadir emoji" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors">
-                                <Smile className="w-5 h-5" />
+                            <button title="Añadir documento" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors">
+                                <FileText className="w-5 h-5" />
                             </button>
-                            <button title="Añadir ubicación" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
-                                <MapPin className="w-5 h-5" />
+                            <button title="Añadir enlace" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
+                                <Link className="w-5 h-5" />
                             </button>
                         </div>
 
