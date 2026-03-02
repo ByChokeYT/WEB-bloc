@@ -100,6 +100,12 @@ const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
                                 <span className="hidden sm:inline w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
                                 <span className="shrink-0">{post.timestamp}</span>
                             </div>
+
+                            {post.category && (
+                                <div className="ml-2 px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wide border border-blue-100 dark:border-blue-800/50">
+                                    {post.category}
+                                </div>
+                            )}
                         </div>
 
                         {onDelete && post.author.handle === '@bychoke' && (

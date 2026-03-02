@@ -1,13 +1,15 @@
 import { useState, useRef } from 'react';
-import { Image, Code, FileText, Link, Send, X } from 'lucide-react';
+import { Image, Code, Send, X } from 'lucide-react';
 
 interface CreatePostProps {
-    onPostSubmit?: (content: string, image?: string) => void;
+    onPostSubmit?: (content: string, image?: string, category?: string) => void;
+    currentCategory?: string;
 }
 
-const CreatePost = ({ onPostSubmit }: CreatePostProps) => {
+const CreatePost = ({ onPostSubmit, currentCategory = 'Últimas Noticias' }: CreatePostProps) => {
     const [content, setContent] = useState('');
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState(currentCategory);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +26,12 @@ const CreatePost = ({ onPostSubmit }: CreatePostProps) => {
     const handlePublish = () => {
         if (!content.trim() && !imagePreview) return;
         if (onPostSubmit) {
-            onPostSubmit(content, imagePreview || undefined);
+            onPostSubmit(content, imagePreview || undefined, selectedCategory);
         }
         setContent('');
         setImagePreview(null);
+        // Reseteamos a la categoría actual por defecto
+        setSelectedCategory(currentCategory);
     };
 
     return (
@@ -79,12 +83,20 @@ const CreatePost = ({ onPostSubmit }: CreatePostProps) => {
                             <button title="Añadir bloque de código" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
                                 <Code className="w-5 h-5" />
                             </button>
-                            <button title="Añadir documento" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors">
-                                <FileText className="w-5 h-5" />
-                            </button>
-                            <button title="Añadir enlace" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-full transition-colors hidden sm:block">
-                                <Link className="w-5 h-5" />
-                            </button>
+
+                            {/* Selector de Categoría */}
+                            <select
+                                value={selectedCategory}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                className="ml-2 bg-slate-100 dark:bg-slate-800 border-none text-sm rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer text-slate-700 dark:text-slate-300 font-medium"
+                            >
+                                <option value="Últimas Noticias">Últimas Noticias</option>
+                                <option value="Tutoriales">Tutoriales</option>
+                                <option value="Lanzamientos">Lanzamientos</option>
+                                <option value="Comunidad">Comunidad</option>
+                                <option value="Mi Setup">Mi Setup</option>
+                                <option value="Configuración">Configuración</option>
+                            </select>
                         </div>
 
                         <button
