@@ -59,7 +59,11 @@ const initialPosts = [
     }
 ];
 
-const Feed = () => {
+interface FeedProps {
+    isAdmin?: boolean;
+}
+
+const Feed = ({ isAdmin = true }: FeedProps) => {
     // Inicializar desde localStorage si existe, usar mockPosts como fallback
     const [posts, setPosts] = useState(() => {
         const savedPosts = localStorage.getItem('techsphere-posts');
@@ -116,7 +120,7 @@ const Feed = () => {
                 </h2>
             </header>
 
-            <CreatePost onPostSubmit={handleNewPost} />
+            {isAdmin && <CreatePost onPostSubmit={handleNewPost} />}
 
             <div className="divide-y divide-slate-200 dark:divide-slate-800">
                 {posts.length === 0 ? (
@@ -129,7 +133,7 @@ const Feed = () => {
                             key={post.id}
                             post={post}
                             index={index}
-                            onDelete={handleDelete}
+                            onDelete={isAdmin ? handleDelete : undefined}
                         />
                     ))
                 )}
