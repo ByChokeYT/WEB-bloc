@@ -26,6 +26,7 @@ const CreatePost = ({ onPostSubmit }: CreatePostProps) => {
                 />
                 <div className="flex-1">
                     <textarea
+                        id="create-post-input"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         placeholder="¿Sobre qué tecnología escribirás hoy?"

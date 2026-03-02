@@ -40,7 +40,10 @@ const Sidebar = () => {
                 ))}
             </nav>
 
-            <button className="mt-auto flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-2xl font-semibold shadow-[0_8px_16px_rgba(37,99,235,0.2)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 transition-all duration-200 active:translate-y-0">
+            <button
+                onClick={() => document.getElementById('create-post-input')?.focus()}
+                className="mt-auto flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-2xl font-semibold shadow-[0_8px_16px_rgba(37,99,235,0.2)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 transition-all duration-200 active:translate-y-0"
+            >
                 <PenSquare className="w-5 h-5" />
                 <span>Escribir Artículo</span>
             </button>
