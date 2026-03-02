@@ -60,6 +60,48 @@ const initialPosts = [
         comments: 1205,
         shares: 5430,
         category: 'Últimas Noticias',
+    },
+    {
+        id: '5',
+        author: {
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+        },
+        content: "¡Hola Comunidad! 👋\n\n¿Qué frameworks están utilizando para sus proyectos web este año? Estuve probando Next.js 15 y me parece increíble lo rápido que es el Turbopack. ¡Dejen sus opiniones en los comentarios! 👇",
+        timestamp: '1d',
+        likes: 420,
+        comments: 156,
+        shares: 23,
+        category: 'Comunidad',
+    },
+    {
+        id: '6',
+        author: {
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+        },
+        content: "Renovando el Setup de Desarrollo 🚀\n\nPor fin llegó el nuevo monitor ultrawide y el teclado mecánico custom. La productividad sube un 200% solo por tener más espacio para el código. Mañana subo fotos completas.",
+        timestamp: '2d',
+        likes: 1205,
+        comments: 89,
+        shares: 45,
+        category: 'Mi Setup',
+    },
+    {
+        id: '7',
+        author: {
+            name: 'BYCHOKE',
+            handle: '@bychoke',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
+        },
+        content: "Nueva actualización de configuración de VSCode ⚙️\n\nPara los que preguntan por mi tema y tipografía:\nTema: 'One Dark Pro'\nFuente: 'Fira Code' con ligaduras activadas.\n\nPueden ver mis dotfiles completos en mi cuenta de GitHub.",
+        timestamp: '3d',
+        likes: 672,
+        comments: 34,
+        shares: 112,
+        category: 'Configuración',
     }
 ];
 
@@ -72,7 +114,7 @@ interface FeedProps {
 const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
     // Inicializar desde localStorage si existe, usar mockPosts como fallback
     const [posts, setPosts] = useState(() => {
-        const savedPosts = localStorage.getItem('techsphere-posts');
+        const savedPosts = localStorage.getItem('techsphere-posts-v2');
         if (savedPosts) {
             try {
                 return JSON.parse(savedPosts);
@@ -86,7 +128,7 @@ const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
 
     // Guardar en localStorage cada vez que posts cambien
     useEffect(() => {
-        localStorage.setItem('techsphere-posts', JSON.stringify(posts));
+        localStorage.setItem('techsphere-posts-v2', JSON.stringify(posts));
     }, [posts]);
 
     const formatTimestamp = () => {
@@ -134,7 +176,7 @@ const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
         <div className="flex-1 w-full max-w-2xl mx-auto min-h-screen border-r border-slate-200 dark:border-slate-800 pb-20 md:pb-0">
             <header className="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 md:px-6 md:py-4">
                 <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
-                    Últimas Noticias
+                    {activeCategory}
                 </h2>
             </header>
 
