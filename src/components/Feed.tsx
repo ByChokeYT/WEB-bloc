@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CreatePost from './CreatePost';
-import PostCard from './PostCard';
+import PostCard, { type Post } from './PostCard';
 
 const initialPosts = [
     {
@@ -60,7 +60,31 @@ const initialPosts = [
 ];
 
 const Feed = () => {
-    const [posts, setPosts] = useState(initialPosts);
+    // Inicializar desde localStorage si existe, usar mockPosts como fallback
+    const [posts, setPosts] = useState(() => {
+        const savedPosts = localStorage.getItem('techsphere-posts');
+        if (savedPosts) {
+            try {
+                return JSON.parse(savedPosts);
+            } catch (e) {
+                console.error("No se pudieron cargar los posts locales:", e);
+                return initialPosts;
+            }
+        }
+        return initialPosts;
+    });
+
+    // Guardar en localStorage cada vez que posts cambien
+    useEffect(() => {
+        localStorage.setItem('techsphere-posts', JSON.stringify(posts));
+    }, [posts]);
+
+    const formatTimestamp = () => {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        return `Hoy a las ${hours}:${minutes}`;
+    };
 
     const handleNewPost = (content: string) => {
         const newPost = {
@@ -71,12 +95,16 @@ const Feed = () => {
                 avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
             },
             content,
-            timestamp: 'Ahora',
+            timestamp: formatTimestamp(),
             likes: 0,
             comments: 0,
             shares: 0,
         };
         setPosts([newPost, ...posts]);
+    };
+
+    const handleDelete = (id: string) => {
+        setPosts(posts.filter((post: Post) => post.id !== id));
     };
 
     return (
@@ -90,9 +118,20 @@ const Feed = () => {
             <CreatePost onPostSubmit={handleNewPost} />
 
             <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {posts.map((post, index) => (
-                    <PostCard key={post.id} post={post} index={index} />
-                ))}
+                {posts.length === 0 ? (
+                    <div className="p-8 text-center text-slate-500">
+                        No hay artículos aún. ¡Sé el primero en compartir!
+                    </div>
+                ) : (
+                    posts.map((post: any, index: number) => (
+                        <PostCard
+                            key={post.id}
+                            post={post}
+                            index={index}
+                            onDelete={handleDelete}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

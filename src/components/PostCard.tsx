@@ -1,25 +1,28 @@
 import { useState } from 'react';
-import { Heart, MessageSquare, Share2, MoreHorizontal, Bookmark, BadgeCheck } from 'lucide-react';
+import { Heart, MessageSquare, Share2, Bookmark, BadgeCheck } from 'lucide-react';
 
-interface PostProps {
-    post: {
-        id: string;
-        author: {
-            name: string;
-            handle: string;
-            avatar: string;
-        };
-        content: string;
-        image?: string;
-        timestamp: string;
-        likes: number;
-        comments: number;
-        shares: number;
+export interface Post {
+    id: string;
+    author: {
+        name: string;
+        handle: string;
+        avatar: string;
     };
-    index?: number;
+    content: string;
+    image?: string;
+    timestamp: string;
+    likes: number;
+    comments: number;
+    shares: number;
 }
 
-const PostCard = ({ post, index = 0 }: PostProps) => {
+interface PostProps {
+    post: Post;
+    index?: number;
+    onDelete?: (id: string) => void;
+}
+
+const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(post.likes);
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -98,9 +101,15 @@ const PostCard = ({ post, index = 0 }: PostProps) => {
                             </div>
                         </div>
 
-                        <button className="text-slate-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 p-2 rounded-full transition-colors -mt-2 -mr-2">
-                            <MoreHorizontal className="w-5 h-5" />
-                        </button>
+                        {onDelete && post.author.handle === '@bychoke' && (
+                            <button
+                                onClick={() => onDelete(post.id)}
+                                title="Eliminar publicación"
+                                className="text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded-full transition-colors -mt-2 -mr-2"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
+                            </button>
+                        )}
                     </div>
 
                     {/* Post Text */}
