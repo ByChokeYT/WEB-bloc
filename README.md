@@ -1,6 +1,6 @@
-# SocialSphere - Diseño Premium de Red Social 🌟
+# Blog BYCHOKE - Diseño Premium de Plataforma 🌟
 
-Este es un proyecto de interfaz de usuario de alta calidad inspirado en aplicaciones modernas y minimalistas estilo red social. Fue construido con tecnologías web modernas enfocadas en el rendimiento, la accesibilidad y un diseño impecable (con un modo claro y oscuro automáticos).
+Este es un proyecto de interfaz de usuario de **alta calidad** para una plataforma de blog y red social. Fue construido con tecnologías web modernas enfocadas en el rendimiento, un diseño impecable (con proporciones ajustables entre escritorio y móvil) y características interactivas premium.
 
 <div align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
@@ -13,16 +13,17 @@ Este es un proyecto de interfaz de usuario de alta calidad inspirado en aplicaci
 
 ## ✨ Características Principales
 
-*   **Diseño Premium y Minimalista:** Amplio uso de espacios en blanco, sombras suaves y tipografía moderna inspirada en productos SaaS.
-*   **Totalmente Responsivo:** Una experiencia fluida tanto en dispositivos móviles (navegación inferior) como en pantallas grandes (barras laterales).
-*   **Modo Claro y Oscuro:** Soporte nativo para el esquema de colores preferido del sistema operativo del usuario.
-*   **Micro-animaciones:** Efectos de desplazamiento ligeros en botones, iconos y tarjetas de contenido que mejoran drásticamente la experiencia del usuario.
+*   **Responsive y Escalable:** Diseño cuidadosamente ajustado. Muestra componentes sueltos y anchos en móvil para una experiencia "App nativa", y se encoge inteligentemente en monitores grandes (PC) para evitar interfaces "infladas". No más scroll horizontal accidental.
+*   **Modo Claro y Oscuro:** Soporte nativo para el esquema de colores preferido del sistema operativo del usuario **Y** un botón flotante manual para forzar la luz o la oscuridad a gusto del lector, con guardado de sesión local.
+*   **Notificaciones Premium (Toasts):** Al publicar un artículo o realizar acciones importantes, la aplicación te recibe con notificaciones flotantes temporales elegantes en la parte superior.
+*   **Boletín Interactivo:** Un panel para suscribirse a un boletín ("Newsletter") que cuenta con estados de carga simulados y reemplazo dinámico de componentes por mensajes de agradecimiento al suscribirse.
+*   **Micro-animaciones Avanzadas:** Desde el ícono del corazón que "explota" de color rosa al dar like, hasta componentes que cargan apareciendo en cascada al abrir la página.
 
 ## 🧱 Estructura del Layout
 
-1.  **Sidebar (Izquierda):** Navegación principal fija.
-2.  **Feed (Centro):** Área de creación y lectura de publicaciones simuladas con contadores de interacciones (Likes, Comentarios, etc.).
-3.  **RightPanel (Derecha):** Un panel de herramientas con una barra de búsqueda funcional (a nivel de UI), sección de tendencias ("Trending") y usuarios sugeridos.
+1.  **Sidebar (Izquierda):** Navegación principal que se colapsa a una barra de navegación inferior (Bottom Bar) en teléfonos móviles.
+2.  **Feed (Centro):** Área constreñida a 600px en monitores grandes para mantener la lectura agradable. Permite crear publicaciones, ver el *timeline* y dar reacciones temporales simuladas.
+3.  **RightPanel (Derecha):** Visible solo en pantallas grandes. Contiene la barra de búsqueda, sección de tendencias ("Trending") y la suscripción al Email Newsletter.
 
 ---
 
@@ -47,15 +48,15 @@ Para ejecutar este proyecto en tu propia máquina de manera local:
    ```
 
 4. **Abrir en el navegador:**
-   Navega a la ruta que Vite te proporciona en la terminal (por defecto suele ser `http://localhost:5173/` o `http://localhost:5174/`).
+   Navega a la ruta que Vite te proporciona en la terminal (usualmente `http://localhost:5173/` o `http://localhost:5174/`).
 
 ## 🛠️ Tecnologías Utilizadas
 
 *   [React 19](https://react.dev/)
 *   [Vite](https://vitejs.dev/) - Entorno de construcción ultra rápido.
-*   [Tailwind CSS v4](https://tailwindcss.com/) - Framework CSS basado en utilidades para el estilo.
+*   [Tailwind CSS v4](https://tailwindcss.com/) - Con configuraciones avanzadas para la creación rápida y mantenimiento visual.
 *   [Lucide React](https://lucide.dev/) - Biblioteca de iconos modernos y consistentes.
-*   [TypeScript](https://www.typescriptlang.org/) - Para mayor seguridad y autocompletado de código.
+*   [TypeScript](https://www.typescriptlang.org/) - Para mayor seguridad estructural en componentes.
 
 ---
-*Desarrollado para BYCHOKE.*
+*Diseñado y desarrollado para BYCHOKE.*
