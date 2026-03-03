@@ -18,12 +18,12 @@ const Sidebar = ({ isAdmin = true, activeCategory, setActiveCategory }: SidebarP
     ];
 
     return (
-        <div className="hidden md:flex flex-col w-64 h-screen sticky top-0 border-r border-slate-200 dark:border-slate-800 p-4">
-            <div className="flex items-center gap-3 px-4 py-3 mb-6">
-                <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">B</span>
+        <div className="hidden md:flex flex-col w-56 xl:w-60 h-screen sticky top-0 border-r border-slate-200 dark:border-slate-800 p-3 xl:p-4">
+            <div className="flex items-center gap-2.5 px-3 py-2 mb-4">
+                <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
+                    <span className="text-white font-bold text-sm">B</span>
                 </div>
-                <h1 className="text-xl font-bold tracking-tight">Blog BYCHOKE</h1>
+                <h1 className="text-base xl:text-lg font-bold tracking-tight">Blog BYCHOKE</h1>
             </div>
 
             <nav className="flex-1 space-y-2">
@@ -34,17 +34,17 @@ const Sidebar = ({ isAdmin = true, activeCategory, setActiveCategory }: SidebarP
                             key={index}
                             href="#"
                             onClick={(e) => { e.preventDefault(); setActiveCategory(item.label); }}
-                            className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-200 group ${isActive
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${isActive
                                 ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold'
                                 : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
                                 }`}
                         >
                             <item.icon
-                                className={`w-6 h-6 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'fill-blue-100 dark:fill-blue-900/40' : ''
+                                className={`w-[18px] h-[18px] xl:w-5 xl:h-5 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'fill-blue-100 dark:fill-blue-900/40' : ''
                                     }`}
                                 strokeWidth={isActive ? 2.5 : 2}
                             />
-                            <span className="text-[1.05rem]">{item.label}</span>
+                            <span className="text-[14px] xl:text-[15px]">{item.label}</span>
                         </a>
                     );
                 })}
@@ -53,9 +53,9 @@ const Sidebar = ({ isAdmin = true, activeCategory, setActiveCategory }: SidebarP
             {isAdmin && (
                 <button
                     onClick={() => document.getElementById('create-post-input')?.focus()}
-                    className="mt-auto flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-2xl font-semibold shadow-[0_8px_16px_rgba(37,99,235,0.2)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.3)] hover:-translate-y-0.5 transition-all duration-200 active:translate-y-0"
+                    className="mt-auto flex items-center justify-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-xl font-semibold shadow-md hover:-translate-y-0.5 transition-all duration-200 text-sm xl:text-[15px]"
                 >
-                    <PenSquare className="w-5 h-5" />
+                    <PenSquare className="w-4 h-4 xl:w-[18px] xl:h-[18px]" />
                     <span>Escribir Artículo</span>
                 </button>
             )}

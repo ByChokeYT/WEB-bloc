@@ -17,6 +17,7 @@ const initialPosts = [
         likes: 8431,
         comments: 624,
         shares: 1192,
+        views: 45200,
         category: 'Lanzamientos',
     },
     {
@@ -31,6 +32,7 @@ const initialPosts = [
         likes: 856,
         comments: 42,
         shares: 115,
+        views: 8900,
         category: 'Tutoriales',
     },
     {
@@ -45,6 +47,7 @@ const initialPosts = [
         likes: 3054,
         comments: 290,
         shares: 720,
+        views: 21500,
         category: 'Tutoriales',
     },
     {
@@ -59,6 +62,7 @@ const initialPosts = [
         likes: 15420,
         comments: 1205,
         shares: 5430,
+        views: 112000,
         category: 'Últimas Noticias',
     },
     {
@@ -73,6 +77,7 @@ const initialPosts = [
         likes: 420,
         comments: 156,
         shares: 23,
+        views: 3100,
         category: 'Comunidad',
     },
     {
@@ -87,6 +92,7 @@ const initialPosts = [
         likes: 1205,
         comments: 89,
         shares: 45,
+        views: 6700,
         category: 'Mi Setup',
     },
     {
@@ -101,6 +107,7 @@ const initialPosts = [
         likes: 672,
         comments: 34,
         shares: 112,
+        views: 5200,
         category: 'Configuración',
     }
 ];
@@ -152,6 +159,7 @@ const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
             likes: 0,
             comments: 0,
             shares: 0,
+            views: 0,
             category: activeCategory,
         };
         setPosts([newPost, ...posts]);
@@ -173,9 +181,13 @@ const Feed = ({ isAdmin = true, searchQuery, activeCategory }: FeedProps) => {
     });
 
     return (
-        <div className="flex-1 w-full max-w-2xl mx-auto min-h-screen border-r border-slate-200 dark:border-slate-800 pb-20 md:pb-0">
-            <header className="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 md:px-6 md:py-4">
-                <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
+        <div className="flex-1 w-full max-w-[600px] mx-auto min-h-screen border-r border-slate-200 dark:border-slate-800 pb-20 md:pb-0">
+            <header className="sticky top-0 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3 md:px-6 md:py-4 flex items-center gap-3">
+                {/* Mobile Logo Logo */}
+                <div className="md:hidden w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
+                    <span className="text-white font-bold text-sm">B</span>
+                </div>
+                <h2 className="text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">
                     {activeCategory}
                 </h2>
             </header>

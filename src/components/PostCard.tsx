@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Heart, MessageSquare, Share2, Bookmark, BadgeCheck } from 'lucide-react';
+import { Heart, MessageSquare, Share2, Bookmark, BadgeCheck, BarChart2, Repeat } from 'lucide-react';
 
 export interface Post {
     id: string;
@@ -14,6 +14,7 @@ export interface Post {
     likes: number;
     comments: number;
     shares: number;
+    views: number;
     category?: string;
 }
 
@@ -71,15 +72,15 @@ const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
 
     return (
         <article
-            className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 md:p-6 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/10 animate-fade-in-up"
+            className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-3 sm:p-4 transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/10 animate-fade-in-up"
             style={{ animationDelay: `${index * 0.15}s`, opacity: 0 }}
         >
-            <div className="flex gap-3 md:gap-4">
+            <div className="flex gap-2.5 sm:gap-3">
                 {/* Avatar */}
                 <img
                     src={post.author.avatar}
                     alt={post.author.name}
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+                    className="w-10 h-10 rounded-full object-cover shrink-0 cursor-pointer hover:opacity-90 transition-opacity mt-1"
                 />
 
                 {/* Content Area */}
@@ -88,21 +89,21 @@ const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
                     <div className="flex items-start justify-between">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
                             <div className="flex items-center gap-1">
-                                <span className="font-bold text-slate-900 dark:text-slate-100 hover:underline cursor-pointer truncate">
+                                <span className="font-bold text-[14px] sm:text-[15px] text-slate-900 dark:text-slate-100 hover:underline cursor-pointer truncate">
                                     {post.author.name}
                                 </span>
                                 {post.author.handle === '@bychoke' && (
-                                    <BadgeCheck className="w-4 h-4 text-blue-500 fill-blue-50" />
+                                    <BadgeCheck className="w-[14px] h-[14px] sm:w-4 sm:h-4 text-blue-500 fill-blue-50" />
                                 )}
                             </div>
-                            <div className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
-                                <span className="truncate">{post.author.handle}</span>
-                                <span className="hidden sm:inline w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+                            <div className="flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-sm text-slate-500 dark:text-slate-400">
+                                <span className="truncate max-w-[100px] sm:max-w-none">{post.author.handle}</span>
+                                <span className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
                                 <span className="shrink-0">{post.timestamp}</span>
                             </div>
 
                             {post.category && (
-                                <div className="ml-2 px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wide border border-blue-100 dark:border-blue-800/50">
+                                <div className="ml-1 sm:ml-2 px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-[10px] sm:text-xs font-semibold uppercase tracking-wide border border-blue-100 dark:border-blue-800/50">
                                     {post.category}
                                 </div>
                             )}
@@ -120,7 +121,7 @@ const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
                     </div>
 
                     {/* Post Text */}
-                    <div className="text-slate-800 dark:text-slate-200 text-base md:text-[1.05rem] leading-relaxed mb-4 whitespace-pre-wrap word-break">
+                    <div className="text-slate-800 dark:text-slate-200 text-[15px] sm:text-base md:text-[1.05rem] leading-relaxed mb-3 md:mb-4 whitespace-pre-wrap word-break">
                         {renderContent(post.content)}
                     </div>
 
@@ -132,39 +133,54 @@ const PostCard = ({ post, index = 0, onDelete }: PostProps) => {
                     )}
 
                     {/* Action Buttons */}
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 max-w-md w-full">
-                        <button className="flex items-center gap-2 group transition-colors hover:text-blue-500 text-slate-500 dark:text-slate-400">
-                            <div className="p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors active:scale-75">
-                                <MessageSquare className="w-4 h-4 md:w-5 md:h-5" />
+                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 max-w-md w-full pr-2 sm:pr-0 mt-0.5">
+                        <button className="flex items-center gap-1.5 group transition-colors hover:text-blue-500 text-slate-500 dark:text-slate-400">
+                            <div className="p-1.5 sm:p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors active:scale-75">
+                                <MessageSquare className="w-[18px] h-[18px]" />
                             </div>
-                            <span className="text-xs md:text-sm">{post.comments > 0 ? post.comments : ''}</span>
+                            <span className="text-xs sm:text-[13px]">{post.comments > 0 ? post.comments : ''}</span>
+                        </button>
+
+                        <button className="flex items-center gap-1.5 group transition-colors hover:text-green-500 text-slate-500 dark:text-slate-400">
+                            <div className="p-1.5 sm:p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-green-900/20 transition-colors active:scale-75">
+                                <Repeat className="w-[18px] h-[18px]" />
+                            </div>
+                            <span className="text-xs sm:text-[13px]">{post.shares > 0 ? post.shares : ''}</span>
                         </button>
 
                         <button
                             onClick={handleLike}
-                            className={`flex items-center gap-2 group transition-all duration-300 ${isLiked ? 'text-pink-500' : 'hover:text-pink-500 text-slate-500 dark:text-slate-400'}`}
+                            className={`flex items-center gap-1.5 group transition-all duration-300 ${isLiked ? 'text-pink-500' : 'hover:text-pink-500 text-slate-500 dark:text-slate-400'}`}
                         >
-                            <div className={`p-2 rounded-full transition-all duration-300 ${isLiked ? 'bg-pink-100 dark:bg-pink-900/30' : 'group-hover:bg-pink-50 dark:group-hover:bg-pink-900/20'} active:scale-75`}>
-                                <Heart className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${isLiked ? 'fill-pink-500 scale-110' : 'scale-100'}`} />
+                            <div className={`p-1.5 sm:p-2 rounded-full transition-all duration-300 ${isLiked ? 'bg-pink-100 dark:bg-pink-900/30' : 'group-hover:bg-pink-50 dark:group-hover:bg-pink-900/20'} active:scale-75`}>
+                                <Heart className={`w-[18px] h-[18px] transition-all duration-300 ${isLiked ? 'fill-pink-500 animate-heart-burst' : 'scale-100'}`} />
                             </div>
-                            <span className="text-xs md:text-sm tabular-nums">{likeCount > 0 ? likeCount : ''}</span>
+                            <span className="text-xs sm:text-[13px] tabular-nums">{likeCount > 0 ? likeCount : ''}</span>
                         </button>
 
-                        <button className="flex items-center gap-2 group transition-colors hover:text-green-500 text-slate-500 dark:text-slate-400">
-                            <div className="p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-green-900/20 transition-colors active:scale-75">
-                                <Share2 className="w-4 h-4 md:w-5 md:h-5" />
+                        <button className="flex items-center gap-1.5 group transition-colors hover:text-blue-500 text-slate-500 dark:text-slate-400">
+                            <div className="p-1.5 sm:p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors active:scale-75">
+                                <BarChart2 className="w-[18px] h-[18px]" />
                             </div>
-                            <span className="text-xs md:text-sm">{post.shares > 0 ? post.shares : ''}</span>
+                            <span className="text-xs sm:text-[13px]">{post.views > 0 ? (post.views > 1000 ? (post.views / 1000).toFixed(1) + 'k' : post.views) : ''}</span>
                         </button>
 
-                        <button
-                            onClick={handleBookmark}
-                            className={`flex items-center gap-2 group transition-all duration-300 ${isBookmarked ? 'text-blue-500' : 'hover:text-blue-500 text-slate-500 dark:text-slate-400'}`}
-                        >
-                            <div className={`p-2 rounded-full transition-all duration-300 ${isBookmarked ? 'bg-blue-100 dark:bg-blue-900/30' : 'group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20'} active:scale-75`}>
-                                <Bookmark className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${isBookmarked ? 'fill-blue-500 scale-110' : 'scale-100'}`} />
-                            </div>
-                        </button>
+                        <div className="flex items-center">
+                            <button
+                                onClick={handleBookmark}
+                                className={`flex items-center gap-1.5 group transition-all duration-300 ${isBookmarked ? 'text-blue-500' : 'hover:text-blue-500 text-slate-500 dark:text-slate-400'}`}
+                            >
+                                <div className={`p-1.5 sm:p-2 rounded-full transition-all duration-300 ${isBookmarked ? 'bg-blue-100 dark:bg-blue-900/30' : 'group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20'} active:scale-75`}>
+                                    <Bookmark className={`w-[18px] h-[18px] transition-all duration-300 ${isBookmarked ? 'fill-blue-500 scale-110' : 'scale-100'}`} />
+                                </div>
+                            </button>
+
+                            <button className="flex items-center gap-1.5 group transition-colors hover:text-blue-500 text-slate-500 dark:text-slate-400 hidden sm:flex">
+                                <div className="p-1.5 sm:p-2 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 transition-colors active:scale-75">
+                                    <Share2 className="w-[18px] h-[18px]" />
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,7 @@
 
-import { Search, TrendingUp, Users } from 'lucide-react';
+import { useState } from 'react';
+import { Search, TrendingUp, Mail, Loader2, CheckCircle2 } from 'lucide-react';
+import { useToast } from './Toast';
 
 interface RightPanelProps {
     searchQuery: string;
@@ -14,13 +16,28 @@ const RightPanel = ({ searchQuery, setSearchQuery }: RightPanelProps) => {
         { tag: '#WebPerformance', posts: '210K' },
     ];
 
-    const suggestedUsers = [
-        { name: 'Guillermo Rauch', handle: '@rauchg', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80' },
-        { name: 'Dan Abramov', handle: '@dan_abramov', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80' },
-    ];
+
+    const [email, setEmail] = useState('');
+    const [isSubscribing, setIsSubscribing] = useState(false);
+    const [isSubscribed, setIsSubscribed] = useState(false);
+    const { toast } = useToast();
+
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!email) return;
+
+        setIsSubscribing(true);
+        // Simulate API call
+        setTimeout(() => {
+            setIsSubscribing(false);
+            setIsSubscribed(true);
+            toast('¡Gracias por suscribirte al boletín!', 'success');
+            setEmail('');
+        }, 1500);
+    };
 
     return (
-        <div className="hidden lg:block w-80 h-screen sticky top-0 border-l border-slate-200 dark:border-slate-800 p-6 overflow-y-auto">
+        <div className="hidden lg:block w-72 xl:w-80 h-screen sticky top-0 border-l border-slate-200 dark:border-slate-800 p-5 xl:p-6 overflow-y-auto">
             {/* Search */}
             <div className="relative mb-8 group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -52,28 +69,49 @@ const RightPanel = ({ searchQuery, setSearchQuery }: RightPanelProps) => {
                 </div>
             </div>
 
-            {/* Who to Follow */}
+            {/* Newsletter Subscription */}
             <div className="bg-slate-50 dark:bg-slate-800/30 rounded-3xl p-5 border border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2 mb-5">
-                    <Users className="w-5 h-5 text-purple-500" />
-                    <h2 className="font-bold text-lg">A quién seguir</h2>
+                <div className="flex items-center gap-2 mb-3">
+                    <Mail className="w-5 h-5 text-purple-500" />
+                    <h2 className="font-bold text-lg">Boletín Semanal</h2>
                 </div>
-                <div className="space-y-5">
-                    {suggestedUsers.map((user, i) => (
-                        <div key={i} className="flex items-center gap-3 justify-between">
-                            <div className="flex items-center gap-3 overflow-hidden">
-                                <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover" />
-                                <div className="truncate">
-                                    <p className="font-semibold text-sm text-slate-900 dark:text-slate-100 truncate hover:underline cursor-pointer">{user.name}</p>
-                                    <p className="text-slate-500 dark:text-slate-400 text-xs truncate">{user.handle}</p>
-                                </div>
-                            </div>
-                            <button className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors shrink-0">
-                                Seguir
-                            </button>
+                {isSubscribed ? (
+                    <div className="flex flex-col items-center justify-center py-6 text-center animate-fade-in-up">
+                        <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-3">
+                            <CheckCircle2 className="w-6 h-6 text-green-500" />
                         </div>
-                    ))}
-                </div>
+                        <h3 className="font-bold text-slate-800 dark:text-slate-200 mb-1">¡Suscripción Exitosa!</h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Revisa tu bandeja de entrada pronto.</p>
+                    </div>
+                ) : (
+                    <>
+                        <p className="text-[13px] text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            Recibe los mejores artículos sobre desarrollo web y tecnología directamente en tu correo. ¡Cero spam!
+                        </p>
+                        <form className="space-y-3" onSubmit={handleSubscribe}>
+                            <input
+                                type="email"
+                                placeholder="tu@email.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                disabled={isSubscribing}
+                                className="w-full px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm disabled:opacity-50 transition-all"
+                                required
+                            />
+                            <button
+                                type="submit"
+                                disabled={isSubscribing}
+                                className="w-full flex items-center justify-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-semibold py-2 rounded-xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors text-sm disabled:opacity-70 disabled:cursor-not-allowed h-10"
+                            >
+                                {isSubscribing ? (
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : (
+                                    "Suscribirse"
+                                )}
+                            </button>
+                        </form>
+                    </>
+                )}
             </div>
 
             <div className="mt-6 px-4">
